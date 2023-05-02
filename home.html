@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Haa</title>
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <script src="scripts/service.js"></script>
+    <script src="scripts/todo.js"></script>
+    <script src="scripts/navigation.js"></script>
+    <script src="scripts/side-nav.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/script_cv.js"></script>
+  </head>
+  <body>
+    <div style="height: 100%">
+      <h4 id="hamburger" onclick="openNavigation()">&#x2261;</h4>
+      <div id="navigation" class="card responsible-full-screen">
+        <div style="width:100%">
+
+          <img src="assets/cv-logo.png" id="logo" />
+          <h4 id="navigation-close" class="hoverable responsible-show" onclick="closeNavigation()">
+            ✕
+          </h4>
+        </div>
+        <div class="profile-container">
+          <img
+            src="assets/profile.svg"
+            height="30"
+            id="user-profile"
+            class="round-img"
+          />
+          <div>
+
+            <label id="user-name">Jose Mourinho</label>
+            <label id="user-studentId">6531329321</label>
+            
+          </div>
+          <button
+              id="user-button"
+              class="card hoverable info"
+              onclick="logout()"
+          >ออกจากระบบ</button>
+        </div>
+        <div id="genre-container">
+          <!--Render From JS-->
+        </div>
+      </div>
+      <div class="content responsible-full-screen">
+        <div class="content-header">
+          <div style="float: left">
+            <button
+              id="user-button"
+              class="card hoverable primary"
+              onclick="openForm()"
+            >
+              Add Todo +
+            </button>
+          </div>
+          <div style="float: right">
+            <input
+              type="date"
+              id="content-date" class="card"
+              onchange="setFilterDuedate()"
+            />
+          </div>
+        </div>
+        <div class="grid-container content-body" id="todo-container">
+          <!--Render From JS-->
+        </div>
+      </div>
+    </div>
+    <div id="side-nav" class="card responsible-full-screen">
+      <div>
+        <h4 id="side-nav-close" class="hoverable" onclick="closeSideNav()">
+          ✕
+        </h4>
+      </div>
+      <form>
+        <input type="textbox" id="form-name" placeholder="ชื่อ #Todo" />
+        <br />
+        <input type="date" id="form-duedate" />
+        <br />
+        <select id="form-status">
+          <option value="Todo">Todo</option>
+          <option value="Todo">In-Progress</option>
+          <option value="Todo">Finish</option>
+        </select>
+        <select id="form-genre"></select>
+        <br />
+        <textarea
+          id="form-description"
+          placeholder="Please press any description."
+        ></textarea>
+        <br /><br />
+      </form>
+      <div>
+        <button
+          id="save-create"
+          class="card info hoverable"
+          onclick="saveForm()"
+        >
+          create
+        </button>
+        <button class="card error hoverable" onclick="deleteForm()">
+          delete
+        </button>
+      </div>
+    </div>
+  </body>
+  <script>
+    main();
+  </script>
+</html>

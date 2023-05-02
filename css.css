@@ -1,0 +1,323 @@
+
+/*=======================================
+    $Section : App
+========================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300&display=swap');
+html{
+    height:100%;
+}
+body{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    background:linear-gradient(135deg,#4d525ccc,#173223cc), url('assets/background.jpg');
+    background-attachment: fixed;
+    background-size:cover;
+    font-family: 'Sarabun','Sarabun';
+    color:#383838;
+    height:100%;
+}
+button,input[type=submit]{
+    background-color:aquamarine;
+    padding:5px 15px!important;
+    border:0;
+    outline:none;
+    font-size:15px;
+    font-weight:normal;
+}
+div{
+    overflow:hidden;
+    box-sizing: border-box;
+}
+input,textarea{
+    border:none;
+    background-color:transparent;
+    font-weight:bold;
+    font-family: 'Sarabun';
+}
+input[type=date]{
+    font-weight:normal;
+    font-size:18px;
+    background-color:transparent;
+    cursor:pointer;
+}
+img{
+    object-fit:cover;
+    border:0;
+}
+*:focus {
+    outline: none;
+}
+p{
+    margin:0;
+}
+::-webkit-scrollbar{
+    background:none;
+    width:0;
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius:10px;
+    padding:5px;
+    font-family: 'Sarabun';
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap:30px;
+    padding:10px;
+}
+.hoverable{
+    transition:ease-in-out 0.2s;
+}
+.hoverable:hover{
+    
+    transition: ease-in-out 0.2s;
+    opacity:0.8;
+    cursor:pointer;
+}
+.primary{
+    background:linear-gradient(90deg,aquamarine,yellowgreen);
+    border:0!important;
+    color: black !important;
+}
+.info{
+    background-color:#00BFFF;
+    border:0!important;
+    color:black!important;
+}
+.round-img{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    float:left;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.error{
+    background-color:red;
+    border:0!important;
+    color:#e8eaed!important;
+}
+.responsible-show{
+    display:none;
+}
+
+/*=======================================
+    $Section : Navigation
+========================================*/
+
+#hamburger{
+    font-size:30px;
+    color:white;
+    position:fixed;
+    z-index:4;
+    left:15px;
+    top:5px;
+    margin:0;
+    padding:0;
+    cursor:pointer;
+}
+#navigation{
+    width:300px!important;
+    padding:5px;
+    overflow-y:scroll;
+    height:100%;
+    background-color:#202124;
+    border-radius:0;
+    position:fixed;
+    z-index:69;
+    left:0;
+    transition: 1s ease-in-out;
+}
+#navigation h2{
+    margin:0;
+}
+#navigation-close{
+    color:white;
+    float:right;
+}
+#logo{
+    background-color:#202124;
+    width:80%;
+    float:left;
+}
+
+.profile-container{
+    width:100%;
+    padding:5px;
+    margin:5px;
+    color:white;
+}
+
+#user-profile{
+    border-radius:50%;
+    height:50px;
+    width:50px;
+}
+
+#genre-container{
+    
+}
+.genre{
+    padding:5px;
+    border-radius:5px;
+    background-color:transparent;
+    color:#e8eaed;
+    /*border-left:5px solid #ff6289;*/
+}
+.genre img{
+    width:40px;
+    height:40px;
+    float:left;
+    padding:3px;
+    border-radius:50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color:#383a3f;
+}
+.genre span{
+    display: block;
+    width:220px;
+    box-sizing: border-box;
+    padding-left:10px;
+    height:100%;
+    float:left;
+    font-size:13px;
+}
+
+/*=======================================
+    $Section : Content
+========================================*/
+
+.content{
+    float:right;
+    width:calc(100% - 335px);
+    padding:5px;
+    height:100%;
+    overflow-y:scroll;
+}
+.content-header{
+    height:45px;
+    padding:0 5px;
+    
+}
+.content-header div{
+    padding:5px;
+}
+#date-card-list{
+    width:100%;
+    padding:10px;
+}
+#content-date{
+    background-color:white;
+    font-size:15px;
+}
+
+/*=======================================
+    $Section : Todo
+========================================*/
+
+.todo{
+    background-color:#ffffff;
+    padding:10px;
+    border-radius:0;
+    border-bottom:5px solid rgb(199, 199, 199);
+    cursor:pointer;
+    font-size:15px;
+}
+.todo:hover{
+    box-shadow:0 0 10px rgb(255, 255, 255);
+    opacity:1;
+}
+.todo div{
+    padding-bottom:5px;
+    border-bottom:1px solid #20212455;
+    border-bottom-style:dashed;
+}
+.todo select, #side-nav select{
+    border:0;
+    padding:1px 5px;
+    font-family: 'Sarabun';
+    margin:10px 0 ;
+}
+.todo span{
+    text-align:left;
+    float:left;
+}
+.todo div h2{
+    float:left;
+    margin:0;
+    font-weight:bold;
+    font-size:15px;
+}
+.todo div h4{
+    float:right;
+    margin:0;
+    font-size:15px;
+}
+.todo p{
+    height:100px;
+    overflow-y:scroll;
+    font-size:15px;
+}
+
+/*=======================================
+    $Section : Slide Bar
+========================================*/
+
+#side-nav{
+    position:fixed;
+    height:100%;
+    width:300px!important;
+    background-color:#e8eaed;
+    top:0;
+    right:-300px;
+    padding:15px;
+    overflow-y:scroll;
+    transition: 1s;
+    
+}
+#side-nav form{
+    padding-bottom:15px;
+    border-bottom:1px solid #202124cc;
+    border-bottom-style:dashed;
+}
+#side-nav form input,#side-nav form textarea{
+    width:100%;
+}
+#side-nav form input[type=textbox]{
+    font-size:25px;
+}
+#side-nav form textarea{
+    font-weight:lighter;
+    font-size:15px;
+    height:200px;
+}
+#side-nav form input[type=date]{
+    
+    width:100%;
+}
+#side-nav-close{
+    cursor:pointer;
+}
+#form-genre,#todo-genre{
+    background-color:yellowgreen;
+}
+#form-status,#todo-status{
+    background-color:aquamarine;
+}
+
+@media only screen and (max-width: 600px) {
+    .responsible-full-screen{
+        width: calc(100% - 40px) !important;
+        float:right;
+    }
+    .responsible-hide{
+        display:none;
+    }
+    .responsible-show{
+        display:block;
+    }
+}
