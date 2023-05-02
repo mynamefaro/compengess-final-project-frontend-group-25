@@ -27,7 +27,7 @@ function renderGenres() {
         <div class="genre hoverable ${
           filter_genre == genre.genre_id ? "card primary" : ""
         }" 
-        onclick="setFilterGenre('${genre.name}')" >
+        onclick="setFilterGenre(${genre.genre_id})" >
             <img src="${
               genre.profile || "assets/icon-default.png"
             }" >

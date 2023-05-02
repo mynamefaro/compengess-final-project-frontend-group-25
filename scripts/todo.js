@@ -67,7 +67,7 @@ function renderTodos() {
   };
   for (var i = 0; i < todos.length; ++i) {
     var todo = todos[i];
-
+    console.log(todo.genre);
     // TODO: Please Filter data if it has a filter
     if (
       (filter_genre == null || filter_genre == todo.genre) &&
@@ -160,14 +160,6 @@ function setFilterGenre(genre) {
   renderPage();
 }
 
-// function getStatus(index) {
-//   for (const status in todo_status) {
-//     if (todo_status[status] == index) {
-//       return status;
-//     }
-//   }
-//   return "olo";
-// }
 
 function compareTodo(a, b) {
   if (a.duedate.split("-") < b.duedate.split("-")) {

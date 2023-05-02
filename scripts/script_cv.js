@@ -11,7 +11,7 @@ const getUserProfile = async () => {
     method: "GET",
     credentials: "include",
     headers: {
-      'Set-Cookie': 'cross-site-cookie=name; samesite=none; secure'
+      "Set-Cookie": "cross-site-cookie=name; samesite=none; secure",
     },
   };
   await fetch(
@@ -20,16 +20,16 @@ const getUserProfile = async () => {
   )
     .then((response) => response.json())
     .then((data) => {
-
       data = data.data;
 
       console.log(data.account.profile_pic);
-      $("user-name").innerHTML = `${data.student.firstname_en} ${data.student.lastname_en}`;
+      $(
+        "user-name"
+      ).innerHTML = `${data.student.firstname_en} ${data.student.lastname_en}`;
       $("user-studentId").innerHTML = `${data.student.id} `;
       $("user-profile").src = `${data.account.profile_pict}`;
       // deleteAllCookies();
-    }
-    )
+    })
     .catch((error) => console.error(error));
 };
 
@@ -42,7 +42,7 @@ const getUserCourses = async () => {
     method: "GET",
     credentials: "include",
     headers: {
-      'Set-Cookie': 'cross-site-cookie=name; samesite=none; secure'
+      "Set-Cookie": "cross-site-cookie=name; samesite=none; secure",
     },
   };
   await fetch(`http://${backendIPAddress}/courseville/get_courses`, options)
@@ -50,23 +50,21 @@ const getUserCourses = async () => {
     .then((data) => {
       data = data.data;
       console.log(data);
-      for (var i = 0;i < data.student.length;++i) {
+      for (var i = 0; i < data.student.length; ++i) {
         var course = data.student[i];
         if (course.semester == 2) {
-          
-          console.log(course);
-
+          console.log(course.cv_cid);
+          filter_genre = course.cv_cid;
           genres.push({
             genre_id: course.cv_cid,
             profile: course.course_icon,
             name: course.title,
             description: course.course_no,
           });
-          // getCourseAssignments(course.cv_cid);
+          getCourseAssignments(course.cv_cid);
         }
       }
-      filter_genre = null;
-
+      
       renderPage();
       setGenres();
     })
@@ -101,55 +99,47 @@ const getCourseAssignments = async (cv_cid) => {
     method: "GET",
     credentials: "include",
     headers: {
-      'Set-Cookie': 'cross-site-cookie=name; samesite=none; secure'
+      "Set-Cookie": "cross-site-cookie=name; samesite=none; secure",
     },
   };
   await fetch(
-    `http://${backendIPAddress}/courseville/get_course_assignments`,
+    `http://${backendIPAddress}/courseville/get_course_assignments/` + cv_cid,
     options
   )
     .then((response) => response.json())
     .then((data) => {
-      for (const assignment in data) {
-        // assignment.push(getAssignmentInfo(assignment.itemid,cv_cid));
-        assignment.push({
+      console.log("succeed")
+      data = data.data;
+      for (var i = 0; i < data.length; ++i) {
+        
+        var assignment = data[i];
+      
+    //   for (const assignment in data) {
+    //     // assignment.push(getAssignmentInfo(assignment.itemid,cv_cid));
+        todo = {
           todo_id: assignment.itemid,
           student_id: $("user-name").value,
           name: assignment.title,
           duedate: assignment.duedate,
           status: assignment.status,
-          genre: filter_genre,
-          description: !assignment.instruction ? "" : assignment.instruction,
+          genre: cv_cid,
+          description: (!("undefined"))? "" : '<a href="https://www.mycourseville.com/?q=courseville/worksheet/'+ cv_cid +'/'+assignment.itemid +'" target="new">Go to My Course Ville</a>',
           type: assignment.type,
-        });
+        };
+        console.log(todo.name+" "+todo.genre);
+        todos.push(todo);
+          // {
+        //   todo_id: assignment.itemid,
+        //   student_id: $("user-name").value,
+        //   name: assignment.title,
+        //   duedate: assignment.duedate,
+        //   status: assignment.status,
+        //   genre: filter_genre,
+        //   description: !assignment.instruction ? "" : assignment.instruction,
+        //   type: assignment.type,
+        // });
       }
       renderPage();
     })
     .catch((error) => console.error(error));
 };
-
-// const getAssignmentInfo = async (itemid,cv_cid) => {
-//   const options = {
-//     method: "GET",
-//     credentials: "include",
-//   };
-//   await fetch(
-//     `http://${backendIPAddress}/courseville/get_item_assignment`,
-//     options
-//   )
-//     .then((response) => response.json())
-//     .then((data) => {
-//       return {
-//           todo_id: data.itemid,
-//           student_id: $("user-name").value,
-//           name: data.title,
-//           duedate: data.duedate,
-//           status: todo_status[data.status],
-//           genre: searchGenre(cv_cid),
-//           description: (!data.instruction) ? "" : data.instruction,
-//           type:
-//         };
-//     })
-//     .catch((error) => console.error(error));
-// };
-
