@@ -24,8 +24,9 @@ const getUserProfile = async () => {
 
       $(
         "user-name"
-      ).innerHTML = `${data.user.title_en} ${data.user.firstname_en} ${data.user.lastname_en}`;
-      $("user-id").innerHTML = `${data.user.id}`;
+      ).innerHTML = `${data.student.title_en} ${data.student.firstname_en} ${data.student.lastname_en}`;
+      $("user-id").innerHTML = `${data.student.id}`;
+      $("user-profile").innerHTML = `${data.account.profile_pict}`;
       // deleteAllCookies();
     }
     )

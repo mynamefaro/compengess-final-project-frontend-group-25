@@ -89,9 +89,10 @@ function selectTodo(i) {
 function setSelectedTodo(i) {
   todos.sort(compareTodo);
   selected_todo = todos[i];
+  console.log(selected_todo.todo_id);
 }
 
-function addTodo() {
+function openForm() {
   try {
     $("form-name").value = null;
     $("form-duedate").value = null;
@@ -104,7 +105,7 @@ function addTodo() {
   openSideNav(0);
 }
 
-function createTodos() {
+function addTodo() {
   //TODO: please fill code
   // return {
   //   // todo_id: "00000" + todos.length.toString(),
@@ -116,18 +117,10 @@ function createTodos() {
   //   description: $("form-description").value,
   // };
 
-  todo = {
-    todo_id: "00000" + todos.length.toString(),
-    student_id: $("user-studentId").value,
-    name: $("form-name").value,
-    duedate: !$("form-duedate").value ? "2999-12-31" : $("form-duedate").value,
-    status: $("form-status").selectedIndex,
-    genre: $("form-genre").value,
-    description: $("form-description").value,
-    type: 0,
-  };
+  todo = createNewTodo();
   todos.push(todo);
   addTodosToAPI(todo);
+  alert(todo.todo_id);
 }
 
 function updateTodo() {
@@ -144,16 +137,7 @@ function updateTodo() {
   deleteTodosFromAPI(selected_todo);
   for (let i = 0; i < todos.length; i++) {
     if (todos[i].todo_id === selected_todo.todo_id) {
-      todos[i] = {
-        todo_id: todo.todo_id,
-        student_id: $("user-studentId").value,
-        name: $("form-name").value,
-        duedate: $("form-duedate").value,
-        status: $("form-status").selectedIndex,
-        genre: $("form-genre").value,
-        description: $("form-description").value,
-        type: 0,
-      };
+      todos[i] = createNewTodo();
       addTodosToAPI(todos[i]);
     }
   }
@@ -194,4 +178,17 @@ function compareTodo(a, b) {
     return 1;
   }
   return 0;
+}
+
+function createNewTodo(){
+  return {
+    todo_id: Math.round((Math.random() * 1e8)),
+    student_id: $("user-studentId").value,
+    name: $("form-name").value,
+    duedate: !$("form-duedate").value ? "2999-12-31" : $("form-duedate").value,
+    status: $("form-status").selectedIndex,
+    genre: $("form-genre").value,
+    description: $("form-description").value,
+    type: 0,
+  };
 }

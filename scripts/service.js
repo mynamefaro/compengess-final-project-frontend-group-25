@@ -31,6 +31,7 @@ function addTodosToAPI(newTodo){
         headers: {
               'Content-Type': 'application/json',
           } ,body: JSON.stringify({
+            "todo_id" : newTodo.todo_id,
             "status" : newTodo.status,
             "name" : newTodo.name,
             "description" : newTodo.description,

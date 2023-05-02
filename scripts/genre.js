@@ -57,10 +57,10 @@ function setGenres() {
   document.getElementById("form-genre").innerHTML = new_element;
 }
 
-function searchGenre(genre_id) {
+function searchGenreId(name) {
   for (const genre in genres) {
-    if (genre.genre_id == genre_id) {
-      return genre.name;
+    if (genre.name == name) {
+      return genre.genre_id;
     }
   }
 }

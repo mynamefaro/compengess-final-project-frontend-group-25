@@ -41,8 +41,8 @@ function saveForm() {
       updateTodo();
     }
   } else {
-    createTodos();
-  }
+      addTodo();
+    }
   closeSideNav();
 
   renderPage();
