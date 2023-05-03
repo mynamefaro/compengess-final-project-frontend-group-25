@@ -35,8 +35,10 @@ const monthNames = [
 
 var filter_duedate = "";
 var filter_genre = null;
+var filter_student = null;
 
 const todo_status = { Todo: 0, "In-Progress": 1, Finished: 2 };
+const status_name = ["Todo","In-Progress","Finished"];
 var oldTodos = [];
 var todos = [];
 var assignment = [];
@@ -52,12 +54,12 @@ function renderTodos() {
   var new_element = "";
   var getElement = (todo) => {
     return `
-        <div class="todo card hoverable" onclick="selectTodo(${i})">
+        <div class="todo card hoverable ${todo.type == 0 ? '' : 'light-info'}" onclick="selectTodo(${i})">
             <div>
                 <h2>${todo.name}
                 <br>${new Date(todo.duedate).getDate()} ${
       monthNames[new Date(todo.duedate).getMonth()]
-    } ${new Date(todo.duedate).getFullYear()}</h2> 
+    } ${new Date(todo.duedate).getFullYear()} <br><span class="todo-${todo.status} card">${status_name[todo.status]}</span></h2> 
             </div>
             
             <p>
@@ -65,11 +67,17 @@ function renderTodos() {
             </p>
         </div>`;
   };
+
+  filter_student = $("user-studentId").innerHTML;
   for (var i = 0; i < todos.length; ++i) {
     var todo = todos[i];
-    console.log(todo.genre);
+    // console.log(todo.genre);
+    // console.log(filter_genre);
     // TODO: Please Filter data if it has a filter
+    console.log(todo.student_id);
+    console.log(filter_student+"  1")
     if (
+      (filter_student == null || filter_student == todo.student_id) &&
       (filter_genre == null || filter_genre == todo.genre) &&
       (filter_duedate == "" || filter_duedate == todo.duedate)
     ) {
@@ -82,9 +90,10 @@ function renderTodos() {
 function selectTodo(i) {
   setSelectedTodo(i);
   // alert(i);
-  // console.log(selected_todo.name);
+  console.log(selected_todo.genre);
+  if(!isAssignment(selected_todo)){
   setFormData();
-  openSideNav(1);
+  openSideNav(1);}
 }
 function setSelectedTodo(i) {
   todos.sort(compareTodo);
@@ -115,11 +124,11 @@ function addTodo() {
   //   genre: $("form-genre").value,
   //   description: $("form-description").value,
   // };
-
+  console.log(todos.length);
   todo = createNewTodo();
   todos.push(todo);
+  console.log(todos.length);
   addTodosToAPI(todo);
-  alert(todo.todo_id);
 }
 
 function updateTodo() {
@@ -174,7 +183,7 @@ function compareTodo(a, b) {
 function createNewTodo(){
   return {
     todo_id: Math.round((Math.random() * 1e8)) + "",
-    student_id: $("user-studentId").value,
+    student_id: $("user-studentId").innerHTML,
     name: $("form-name").value,
     duedate: !$("form-duedate").value ? "2999-12-31" : $("form-duedate").value,
     status: $("form-status").selectedIndex,

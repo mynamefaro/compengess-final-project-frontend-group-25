@@ -14,11 +14,11 @@ var genre = {
   genre_id: null,
   student_id: null,
   profile: null,
-  name: null,
-  description: null,
+  name: "All",
+  description: "Subjects",
 };
 
-const genres = []; //list of genres
+const genres = [genre]; //list of genres
 
 function renderGenres() {
   var new_element = "";
@@ -49,7 +49,7 @@ function setGenres() {
   var new_element = "";
   var getElement = (genre) => {
     return `
-        <option value= "${genre.name}"> ${genre.description}</option>`;
+        <option value= "${genre.genre_id}"> ${genre.description}</option>`;
   };
   for (var i = 0; i < genres.length; ++i) {
     var genre = genres[i];

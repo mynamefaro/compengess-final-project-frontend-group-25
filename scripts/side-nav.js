@@ -34,12 +34,7 @@ function test() {
 function saveForm() {
   //TODO: please fill code.\
   if (isInTodos()) {
-    if(isAssignment(selected_todo)){
-      alert("cannot edit assignment");
-    }
-    else{
       updateTodo();
-    }
   } else {
       addTodo();
   }
@@ -51,12 +46,7 @@ function deleteForm() {
   //TODO: please fill code.\
 
   if (isInTodos()) {
-    if (isAssignment(selected_todo)){
-      alert("cannot delete assignment");
-    }
-    else{
       deleteTodo();
-    }
   }
   closeSideNav();
 

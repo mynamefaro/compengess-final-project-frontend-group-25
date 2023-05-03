@@ -10,9 +10,6 @@ const getUserProfile = async () => {
   const options = {
     method: "GET",
     credentials: "include",
-    headers: {
-      "Set-Cookie": "cross-site-cookie=name; samesite=none; secure",
-    },
   };
   await fetch(
     `http://${backendIPAddress}/courseville/get_profile_info`,
@@ -22,12 +19,15 @@ const getUserProfile = async () => {
     .then((data) => {
       data = data.data;
 
-      console.log(data.account.profile_pic);
+      // console.log(data.account.profile_pic);
       $(
         "user-name"
       ).innerHTML = `${data.student.firstname_en} ${data.student.lastname_en}`;
       $("user-studentId").innerHTML = `${data.student.id} `;
       $("user-profile").src = `${data.account.profile_pict}`;
+      filter_student = $("user-studentId").innerHTML;
+
+      renderPage();
       // deleteAllCookies();
     })
     .catch((error) => console.error(error));
@@ -41,20 +41,16 @@ const getUserCourses = async () => {
   const options = {
     method: "GET",
     credentials: "include",
-    headers: {
-      "Set-Cookie": "cross-site-cookie=name; samesite=none; secure",
-    },
   };
   await fetch(`http://${backendIPAddress}/courseville/get_courses`, options)
     .then((response) => response.json())
     .then((data) => {
       data = data.data;
-      console.log(data);
+      // console.log(data);
       for (var i = 0; i < data.student.length; ++i) {
         var course = data.student[i];
-        if (course.semester == 2) {
-          console.log(course.cv_cid);
-          filter_genre = course.cv_cid;
+        if (course.semester == 2 && course.year == 2022) {
+          // console.log(course.cv_cid);
           genres.push({
             genre_id: course.cv_cid,
             profile: course.course_icon,
@@ -71,36 +67,11 @@ const getUserCourses = async () => {
     .catch((error) => console.error(error));
 };
 
-// const getCourseInfo = async (cv_cid) => {
-//   const options = {
-//     method: "GET",
-//     credentials: "include",
-//   };
-//   await fetch(
-//     `http://${backendIPAddress}/courseville/get_course_info`,
-//     options
-//   )
-//     .then((response) => response.json())
-//     .then((data) => {
-//           return  {
-//             genre_id: data.cv_cid,
-//             student_id: $("user-id").value,
-//             profile: data.course_icon,
-//             name: data.title,
-//             description: data.course_no,
-//           };
-
-//     })
-//     .catch((error) => console.error(error));
-// };
 
 const getCourseAssignments = async (cv_cid) => {
   const options = {
     method: "GET",
     credentials: "include",
-    headers: {
-      "Set-Cookie": "cross-site-cookie=name; samesite=none; secure",
-    },
   };
   await fetch(
     `http://${backendIPAddress}/courseville/get_course_assignments/` + cv_cid,
@@ -118,7 +89,7 @@ const getCourseAssignments = async (cv_cid) => {
     //     // assignment.push(getAssignmentInfo(assignment.itemid,cv_cid));
         todo = {
           todo_id: assignment.itemid,
-          student_id: $("user-name").value,
+          student_id: filter_student,
           name: assignment.title,
           duedate: assignment.duedate,
           status: assignment.status,
@@ -126,7 +97,7 @@ const getCourseAssignments = async (cv_cid) => {
           description: (!("undefined"))? "" : '<a href="https://www.mycourseville.com/?q=courseville/worksheet/'+ cv_cid +'/'+assignment.itemid +'" target="new">Go to My Course Ville</a>',
           type: assignment.type,
         };
-        console.log(todo.name+" "+todo.genre);
+        // console.log(todo.name+" "+todo.genre);
         todos.push(todo);
           // {
         //   todo_id: assignment.itemid,

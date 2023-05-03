@@ -10,7 +10,12 @@ async function main() {
 
   //get Todos
   await getTodosFromAPI((data) => {
-    todos = data;
+    for (var i = 0; i < data.length; ++i) {
+      todo = data[i];
+      todos.push(todo);
+      
+    }
+    // todos.concat(data);
 
     renderPage();
   });
